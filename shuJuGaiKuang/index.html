@@ -1,0 +1,3819 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>平台数据概况</title>
+        <style>
+            /* 共通样式 */
+            * {
+                margin: 0px;
+                padding: 0px;
+            }
+
+            /*清除浮动代码*/
+
+            .clearfloat:after {
+                display: block;
+                clear: both;
+                content: "";
+                visibility: hidden;
+                height: 0;
+            }
+
+            .clearfloat {
+                zoom: 1;
+            }
+
+            .noData {
+                color: rgba(204, 204, 204, 0.747);
+                font-size: 12px;
+                padding: 12px;
+            }
+
+            .boxSizing {
+                box-sizing: border-box;
+                -webkit-box-sizing: border-box;
+                -ms-box-sizing: border-box;
+                -o-box-sizing: border-box;
+                -moz-box-sizing: border-box;
+            }
+
+            body {
+                background-color: #EBF2F8;
+            }
+
+            .blue-bg {
+                background-color: #507bfc;
+            }
+
+            .white-bg {
+                background-color: #ffffff;
+            }
+
+            .blue-color {
+                color: #2D3D62;
+            }
+
+            .white-color {
+                color: #ffffff;
+            }
+
+
+            .red-color {
+                color: #FF4F4F;
+            }
+
+            .qing-color {
+                color: #79ECCA
+            }
+
+            .gray-color {
+                color: #97A4BA;
+            }
+
+
+            .flex {
+                display: -webkit-flex;
+                /* 新版本语法: Chrome 21+ */
+                display: flex;
+                /* 新版本语法: Opera 12.1, Firefox 22+ */
+                display: -webkit-box;
+                /* 老版本语法: Safari, iOS, Android browser, older WebKit browsers. */
+                display: -moz-box;
+                /* 老版本语法: Firefox (buggy) */
+                display: -ms-flexbox;
+                /* 混合版本语法: IE 10 */
+            }
+
+
+            .flex-v {
+                -webkit-box-orient: vertical;
+                -webkit-flex-direction: column;
+                -ms-flex-direction: column;
+                flex-direction: column;
+            }
+
+            .flex-1 {
+                -webkit-box-flex: 1;
+                -webkit-flex: 1;
+                -ms-flex: 1;
+                flex: 1;
+            }
+
+            .flex-align-center {
+                -webkit-box-align: center;
+                -webkit-align-items: center;
+                -ms-flex-align: center;
+                align-items: center;
+            }
+
+            .flex-pack-center {
+                -webkit-box-pack: center;
+                -webkit-justify-content: center;
+                -ms-flex-pack: center;
+                justify-content: center;
+            }
+
+            .flex-pack-justify {
+                -webkit-box-pack: justify;
+                -webkit-justify-content: space-between;
+                -ms-flex-pack: justify;
+                justify-content: space-between;
+            }
+        </style>
+        <style>
+            .page {
+                padding: 10px 20px;
+                min-width: 1400px;
+                box-sizing: border-box;
+            }
+
+            .page .block {
+                box-sizing: border-box;
+                margin: 15px 0px;
+                box-shadow: 0px 5px 15px -10px rgba(0, 0, 0, 0.2);
+            }
+
+            /* 第一个数据块 */
+            .block-one .top {
+                height: 81px;
+                width: 100%;
+                background: rgba(247, 250, 255, 1);
+                padding: 30px;
+                box-sizing: border-box;
+            }
+
+            .block-one .title {
+                height: 25px;
+                font-size: 18px;
+                font-family: PingFangSC-Medium, PingFang SC;
+                font-weight: 500;
+                color: rgba(103, 117, 141, 1);
+                line-height: 25px;
+            }
+
+            .block-one .date select {
+                width: 123px;
+                height: 32px;
+                border: 1px solid rgba(200, 210, 229, 1);
+                font-size: 14px;
+                font-family: PingFangSC-Regular, PingFang SC;
+                font-weight: 400;
+                color: rgba(151, 164, 186, 1);
+                line-height: 20px;
+                outline: none;
+            }
+
+            .block-one .echartImg {
+                height: 620px;
+                padding: 30px;
+                box-sizing: border-box;
+                position: relative;
+            }
+
+            .block-one .echartImg ul {
+                width: 230px;
+                float: left;
+                border-right: 1px solid #DFDFDF;
+                box-sizing: border-box;
+            }
+
+            .block-one .echartImg ul:nth-last-child(1) {
+                border-right: 0px
+            }
+
+            .block-one .echartImg ul li {
+                margin: 0px;
+                list-style: none;
+                padding-left: 48px;
+                box-sizing: border-box;
+                margin: 48px 0px;
+                position: relative;
+            }
+
+            .block-one .echartImg ul li:before {
+                content: "";
+                display: inline-block;
+                width: 10px;
+                height: 10px;
+                background: rgba(255, 79, 79, 1);
+                position: absolute;
+                left: 26px;
+                top: 8px;
+                border-radius: 50%;
+            }
+
+            .block-one .echartImg ul li .label {
+                height: 24px;
+                font-size: 16px;
+                font-family: PingFangSC-Medium, PingFang SC;
+                font-weight: 500;
+                color: rgba(27, 37, 58, 1);
+                line-height: 24px;
+            }
+
+            .block-one .echartImg ul li .value {
+                width: 116px;
+                height: 42px;
+                font-size: 30px;
+                font-family: PingFangSC-Regular, PingFang SC;
+                font-weight: 400;
+                color: rgba(27, 37, 58, 1);
+                line-height: 42px;
+            }
+
+
+            .block-one .echartImg .map {
+                position: absolute;
+                right: 30px;
+                top: 30px;
+                bottom: 30px;
+                width: 650px;
+                box-sizing: border-box;
+                background: url("./map.png")no-repeat;
+                background-size: 100% 100%;
+            }
+
+            .block-one .echartImg .map .content {
+                width: 100%;
+                height: 100%;
+                position: relative; 
+                position: relative;
+            }
+
+            .block-one .echartImg .map .content .quyu {
+                width: 100px;
+                height: 100px;
+                line-height: 92px;
+                text-align: center;
+                background: url('./qiu_b.png')no-repeat;
+                background-size: 100% 100%;
+                position: absolute;
+                font-size: 18px;
+                font-family: PingFangSC-Medium, PingFang SC;
+                font-weight: 600;
+                color: rgba(255, 255, 255, 1);
+                transition: 0.1s;
+                cursor: pointer;
+            }
+
+            .block-one .echartImg .map .content .quyu:hover {
+                background: url('./qiu_r.png')no-repeat;
+                background-size: 100% 100%;
+                transition: 0.1s;
+            }
+
+            .block-one .echartImg .map .content .quyu.action {
+                background: url('./qiu_r.png')no-repeat;
+                background-size: 100% 100%;
+                width: 108px;
+                height: 108px;
+                line-height: 108px;
+                transition: 0.3s;
+            }
+
+            .block-one .echartImg .map .content .quyu1 {
+                left: 65%;
+                top: -3%;
+            }
+
+            .block-one .echartImg .map .content .quyu2 {
+                left: 88%;
+                top: 8%;
+            }
+
+            .block-one .echartImg .map .content .quyu3 {
+                left: 46%;
+                top: 5%;
+            }
+
+            .block-one .echartImg .map .content .quyu4 {
+                left: 67%;
+                top: 20%;
+            }
+
+            .block-one .echartImg .map .content .quyu5 {
+                left: 78%;
+                top: 35%;
+            }
+
+
+            .block-one .echartImg .map .content .quyu6 {
+                left: 20%;
+                top: 7%;
+            }
+
+            .block-one .echartImg .map .content .quyu7 {
+                left: 35%;
+                top: 25%;
+            }
+
+            .block-one .echartImg .map .content .quyu8 {
+                left: 50%;
+                top: 40%;
+            }
+
+            .block-one .echartImg .map .content .quyu9 {
+                left: 64%;
+                top: 60%;
+            }
+
+
+            .block-one .echartImg .map .content .quyu10 {
+                left: 10%;
+                top: 27%;
+            }
+
+            .block-one .echartImg .map .content .quyu11 {
+                left: 28%;
+                top: 45%;
+            }
+
+            .block-one .echartImg .map .content .quyu12 {
+                left: 40%;
+                top: 60%;
+            }
+
+            .block-one .echartImg .map .content .quyu13 {
+                left: -10%;
+                top: 50%;
+            }
+
+            .block-one .echartImg .map .content .quyu14 {
+                left: 8%;
+                top: 52%;
+            }
+
+            .block-one .echartImg .map .content .quyu15 {
+                left: 18%;
+                top: 68%;
+            }
+
+            .block-one .echartImg .map .content .quyu15 {
+                left: 1%;
+                top: 83%;
+            }
+
+            .block-one .echartImg .map .content .quyu16 {
+                left: 40%;
+                top: 83%;
+            }
+
+
+
+
+            /* 第二数据块 */
+            .block-two .top {
+                height: 81px;
+                width: 100%;
+                background: rgba(247, 250, 255, 1);
+                padding: 30px;
+                box-sizing: border-box;
+            }
+
+            .block-two .title {
+                height: 25px;
+                font-size: 18px;
+                font-family: PingFangSC-Medium, PingFang SC;
+                font-weight: 500;
+                color: rgba(103, 117, 141, 1);
+                line-height: 25px;
+            }
+
+            .block-two .date select {
+                width: 123px;
+                height: 32px;
+                border: 1px solid rgba(200, 210, 229, 1);
+                font-size: 14px;
+                font-family: PingFangSC-Regular, PingFang SC;
+                font-weight: 400;
+                color: rgba(151, 164, 186, 1);
+                line-height: 20px;
+                outline: none;
+            }
+
+            .block-two .list,
+            .block-two .echartImg {
+                height: 450px;
+                width: 50%;
+                box-sizing: border-box;
+                float: left;
+            }
+
+            .block-two .list .tit {
+                font-size: 14px;
+                font-family: PingFangSC-Regular, PingFang SC;
+                font-weight: 400;
+                color: rgba(151, 164, 186, 1);
+                line-height: 20px;
+                text-align: right;
+                padding: 10px 0px;
+            }
+
+            /* 可滚动的table */
+            .block-two .table-con {
+                overflow: hidden;
+                /* float: left; */
+                width: 100%;
+                box-sizing: border-box;
+                padding: 30px;
+            }
+
+            .block-two .table {
+                width: 100%;
+            }
+
+            .block-two .table tbody {
+                display: table;
+                width: 100%;
+            }
+
+            .block-two .table .tbody {
+                box-sizing: border-box;
+                display: block;
+                width: 100%;
+                height: 280px;
+                overflow-y: scroll;
+            }
+
+            .block-two .table .tbody::-webkit-scrollbar {
+                width: 6px;
+            }
+
+            .block-two .table .tbody::-webkit-scrollbar-track {
+                background-color: transparent;
+                -webkit-border-radius: 1em;
+                -moz-border-radius: 1em;
+                border-radius: 1em;
+            }
+
+            .block-two .table .tbody::-webkit-scrollbar-thumb {
+                background-color: rgba(45, 61, 98, 0.808);
+                -webkit-border-radius: 1em;
+                -moz-border-radius: 1em;
+                border-radius: 1em;
+            }
+
+            .block-two .table .tbody tr {
+                display: table;
+                width: 100%;
+            }
+
+            .block-two .table .t-header {
+                height: 70px;
+                background: rgba(235, 242, 248, 1);
+                padding: 0px 20px;
+                box-sizing: border-box;
+            }
+
+            .block-two .table .t-header .td {
+                height: 20px;
+                font-size: 14px;
+                font-family: PingFangSC-Regular, PingFang SC;
+                font-weight: 500;
+                color: rgba(151, 164, 186, 1);
+                line-height: 20px;
+                min-width: 16px;
+                /* border: 1px solid red; */
+                box-sizing: border-box;
+                display: table-cell;
+                text-align: left;
+                text-align: center;
+            }
+
+            .block-two .table .tr {
+                height: 49px;
+                transition: 0.3s;
+                display: table;
+            }
+
+            .block-two .table .tr .td {
+                height: 20px;
+                font-size: 14px;
+                font-family: PingFangSC-Regular, PingFang SC;
+                font-weight: 400;
+                color: rgba(66, 75, 95, 1);
+                line-height: 20px;
+                min-width: 16px;
+                display: table-cell;
+                box-sizing: border-box;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                text-align: center;
+            }
+
+            .block-two .table .tr:nth-child(even) {
+                background: rgba(235, 242, 248, 1);
+            }
+
+            .block-two .table .tr:hover {
+                height: 50px;
+                background: rgba(80, 123, 252, 1);
+                box-shadow: 0px 10px 20px rgba(80, 123, 252, 0.5);
+                transition: 0.3s;
+            }
+
+            .block-two .table .tr.action td {
+                font-size: 14px;
+                font-family: PingFangSC-Regular, PingFang SC;
+                font-weight: 400;
+                color: rgba(255, 255, 255, 1);
+                line-height: 20px;
+
+            }
+
+            /* 第三个数据块 */
+            .block-three .top {
+                height: 81px;
+                width: 100%;
+                background: rgba(247, 250, 255, 1);
+                padding: 30px;
+                box-sizing: border-box;
+            }
+
+            .block-three .title {
+                height: 25px;
+                font-size: 18px;
+                font-family: PingFangSC-Medium, PingFang SC;
+                font-weight: 500;
+                color: rgba(103, 117, 141, 1);
+                line-height: 25px;
+            }
+
+            .block-three .date select {
+                width: 123px;
+                height: 32px;
+                border: 1px solid rgba(200, 210, 229, 1);
+                font-size: 14px;
+                font-family: PingFangSC-Regular, PingFang SC;
+                font-weight: 400;
+                color: rgba(151, 164, 186, 1);
+                line-height: 20px;
+                outline: none;
+            }
+
+            .block-three .list,
+            .block-three .echartImg {
+                height: 450px;
+                width: 50%;
+                box-sizing: border-box;
+                float: left;
+            }
+
+            .block-three .list .tit {
+                font-size: 14px;
+                font-family: PingFangSC-Regular, PingFang SC;
+                font-weight: 400;
+                color: rgba(151, 164, 186, 1);
+                line-height: 20px;
+                text-align: right;
+                padding: 10px 0px;
+            }
+
+            /* 可滚动的table */
+            .block-three .table-con {
+                overflow: hidden;
+                /* float: left; */
+                width: 100%;
+                box-sizing: border-box;
+                padding: 30px;
+            }
+
+            .block-three .table {
+                width: 100%;
+            }
+
+            .block-three .table tbody {
+                display: table;
+                width: 100%;
+            }
+
+            .block-three .table .tbody {
+                box-sizing: border-box;
+                display: block;
+                width: 100%;
+                height: 280px;
+                overflow-y: scroll;
+            }
+
+            .block-three .table .tbody::-webkit-scrollbar {
+                width: 6px;
+            }
+
+            .block-three .table .tbody::-webkit-scrollbar-track {
+                background-color: transparent;
+                -webkit-border-radius: 1em;
+                -moz-border-radius: 1em;
+                border-radius: 1em;
+            }
+
+            .block-three .table .tbody::-webkit-scrollbar-thumb {
+                background-color: rgba(45, 61, 98, 0.808);
+                -webkit-border-radius: 1em;
+                -moz-border-radius: 1em;
+                border-radius: 1em;
+            }
+
+            .block-three .table .tbody tr {
+                display: table;
+                width: 100%;
+            }
+
+            .block-three .table .t-header {
+                height: 70px;
+                background: rgba(235, 242, 248, 1);
+                padding: 0px 20px;
+                box-sizing: border-box;
+            }
+
+            .block-three .table .t-header .td {
+                height: 20px;
+                font-size: 14px;
+                font-family: PingFangSC-Regular, PingFang SC;
+                font-weight: 500;
+                color: rgba(151, 164, 186, 1);
+                line-height: 20px;
+                min-width: 16px;
+                box-sizing: border-box;
+                display: table-cell;
+                text-align: left;
+                text-align: center;
+            }
+
+            .block-three .table .tr {
+                height: 49px;
+                transition: 0.3s;
+                display: table;
+            }
+
+            .block-three .table .tr .td {
+                height: 20px;
+                font-size: 14px;
+                font-family: PingFangSC-Regular, PingFang SC;
+                font-weight: 400;
+                color: rgba(66, 75, 95, 1);
+                line-height: 20px;
+                min-width: 16px;
+                display: table-cell;
+                box-sizing: border-box;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                text-align: center;
+            }
+
+            .block-three .table .tr:nth-child(even) {
+                background: rgba(235, 242, 248, 1);
+            }
+
+            .block-three .table .tr:hover {
+                height: 50px;
+                background: rgba(80, 123, 252, 1);
+                box-shadow: 0px 10px 20px rgba(80, 123, 252, 0.5);
+                transition: 0.3s;
+            }
+
+            .block-three .table .tr.action td {
+                font-size: 14px;
+                font-family: PingFangSC-Regular, PingFang SC;
+                font-weight: 400;
+                color: rgba(255, 255, 255, 1);
+                line-height: 20px;
+
+            }
+
+
+
+
+
+            /*第四块数据块 */
+            .page .block-four {
+                box-shadow: none
+            }
+
+            .block-four .item {
+                width: 32.8%;
+                box-sizing: border-box;
+                box-shadow: 0px 5px 15px -10px rgba(0, 0, 0, 0.2);
+            }
+
+            .block-four .item .top {
+                height: 81px;
+                width: 100%;
+                background: rgba(247, 250, 255, 1);
+                padding: 30px;
+                box-sizing: border-box;
+            }
+
+            .block-four .item .echartImg {
+                padding: 30px;
+            }
+
+            .block-four .item .top .title {
+                height: 25px;
+                font-size: 18px;
+                font-family: PingFangSC-Medium, PingFang SC;
+                font-weight: 500;
+                color: rgba(103, 117, 141, 1);
+                line-height: 25px;
+            }
+
+            .block-four .item .top .date select {
+                width: 123px;
+                height: 32px;
+                border: 1px solid rgba(200, 210, 229, 1);
+                font-size: 14px;
+                font-family: PingFangSC-Regular, PingFang SC;
+                font-weight: 400;
+                color: rgba(151, 164, 186, 1);
+                line-height: 20px;
+                outline: none;
+            }
+
+            .block-four .item .echartImg {
+                height: 450px;
+            }
+
+            /* 第五块样式 */
+            .page .block-five {
+                box-shadow: none
+            }
+
+            .block-five .item {
+                width: 49.5%;
+                box-sizing: border-box;
+                box-shadow: 0px 5px 15px -10px rgba(0, 0, 0, 0.2);
+            }
+
+            .block-five .item .top {
+                height: 81px;
+                width: 100%;
+                background: rgba(247, 250, 255, 1);
+                padding: 30px;
+                box-sizing: border-box;
+            }
+
+            .block-five .item .echartImg {
+                padding: 30px;
+            }
+
+            .block-five .item .top .title {
+                height: 25px;
+                font-size: 18px;
+                font-family: PingFangSC-Medium, PingFang SC;
+                font-weight: 500;
+                color: rgba(103, 117, 141, 1);
+                line-height: 25px;
+            }
+
+            .block-five .item .top .date select {
+                width: 123px;
+                height: 32px;
+                border: 1px solid rgba(200, 210, 229, 1);
+                font-size: 14px;
+                font-family: PingFangSC-Regular, PingFang SC;
+                font-weight: 400;
+                color: rgba(151, 164, 186, 1);
+                line-height: 20px;
+                outline: none;
+            }
+
+            .block-five .item .echartImg {
+                height: 450px;
+            }
+
+            /* 第六块样式 */
+            .page .block-six {
+                box-shadow: none
+            }
+
+            .block-six .item {
+                width: 49.5%;
+                box-sizing: border-box;
+                box-shadow: 0px 5px 15px -10px rgba(0, 0, 0, 0.2);
+            }
+
+            .block-six .item .top {
+                height: 81px;
+                width: 100%;
+                background: rgba(247, 250, 255, 1);
+                padding: 30px;
+                box-sizing: border-box;
+            }
+
+            .block-six .item .echartImg {
+                padding: 30px;
+            }
+
+            .block-six .item .top .title {
+                height: 25px;
+                font-size: 18px;
+                font-family: PingFangSC-Medium, PingFang SC;
+                font-weight: 500;
+                color: rgba(103, 117, 141, 1);
+                line-height: 25px;
+            }
+
+            .block-six .item .top .date select {
+                width: 123px;
+                height: 32px;
+                border: 1px solid rgba(200, 210, 229, 1);
+                font-size: 14px;
+                font-family: PingFangSC-Regular, PingFang SC;
+                font-weight: 400;
+                color: rgba(151, 164, 186, 1);
+                line-height: 20px;
+                outline: none;
+            }
+
+            .block-six .item .echartImg {
+                height: 450px;
+            }
+
+
+            /* 第六块 */
+            .block-seven .top {
+                height: 81px;
+                width: 100%;
+                background: rgba(247, 250, 255, 1);
+                padding: 30px;
+                box-sizing: border-box;
+            }
+
+            .block-seven .title {
+                height: 25px;
+                font-size: 18px;
+                font-family: PingFangSC-Medium, PingFang SC;
+                font-weight: 500;
+                color: rgba(103, 117, 141, 1);
+                line-height: 25px;
+            }
+
+            .block-seven .date select {
+                width: 123px;
+                height: 32px;
+                border: 1px solid rgba(200, 210, 229, 1);
+                font-size: 14px;
+                font-family: PingFangSC-Regular, PingFang SC;
+                font-weight: 400;
+                color: rgba(151, 164, 186, 1);
+                line-height: 20px;
+                outline: none;
+            }
+
+            .block-seven .echartImg {
+                height: 450px;
+            }
+
+            /* 第八块 */
+            .block-eight .top {
+                height: 81px;
+                width: 100%;
+                background: rgba(247, 250, 255, 1);
+                padding: 30px;
+                box-sizing: border-box;
+            }
+
+            .block-eight .title {
+                height: 25px;
+                font-size: 18px;
+                font-family: PingFangSC-Medium, PingFang SC;
+                font-weight: 500;
+                color: rgba(103, 117, 141, 1);
+                line-height: 25px;
+            }
+
+            .block-eight .date select {
+                width: 123px;
+                height: 32px;
+                border: 1px solid rgba(200, 210, 229, 1);
+                font-size: 14px;
+                font-family: PingFangSC-Regular, PingFang SC;
+                font-weight: 400;
+                color: rgba(151, 164, 186, 1);
+                line-height: 20px;
+                outline: none;
+            }
+
+            .block-eight .list,
+            .block-eight .echartImg {
+                height: 450px;
+                width: 50%;
+                box-sizing: border-box;
+                float: left;
+            }
+
+            /* 可滚动的table */
+            .block-eight .table-con {
+                overflow: hidden;
+                width: 100%;
+                box-sizing: border-box;
+                padding: 30px;
+            }
+
+            .block-eight .table {
+                width: 100%;
+            }
+
+            .block-eight .table tbody {
+                display: table;
+                width: 100%;
+            }
+
+            .block-eight .table .tbody {
+                box-sizing: border-box;
+                display: block;
+                width: 100%;
+                height: 320px;
+                overflow-y: scroll;
+            }
+
+            .block-eight .table .tbody::-webkit-scrollbar {
+                width: 6px;
+            }
+
+            .block-eight .table .tbody::-webkit-scrollbar-track {
+                background-color: rgba(182, 183, 185, 0.514);
+                -webkit-border-radius: 1em;
+                -moz-border-radius: 1em;
+                border-radius: 1em;
+            }
+
+            .block-eight .table .tbody::-webkit-scrollbar-thumb {
+                background-color: rgba(45, 61, 98, 0.808);
+                -webkit-border-radius: 1em;
+                -moz-border-radius: 1em;
+                border-radius: 1em;
+            }
+
+            .block-eight .table .tbody tr {
+                display: table;
+                width: 100%;
+            }
+
+            .block-eight .table .t-header {
+                height: 70px;
+                background: rgba(235, 242, 248, 1);
+                padding: 0px 20px;
+                box-sizing: border-box;
+            }
+
+            .block-eight .table .t-header .td {
+                height: 20px;
+                font-size: 14px;
+                font-family: PingFangSC-Regular, PingFang SC;
+                font-weight: 500;
+                color: rgba(151, 164, 186, 1);
+                line-height: 20px;
+                min-width: 16px;
+                box-sizing: border-box;
+                display: table-cell;
+                text-align: left;
+                text-align: center;
+            }
+
+            .block-eight .table .tr {
+                height: 49px;
+                transition: 0.3s;
+                display: table;
+            }
+
+            .block-eight .table .tr .td {
+                height: 20px;
+                font-size: 14px;
+                font-family: PingFangSC-Regular, PingFang SC;
+                font-weight: 400;
+                color: rgba(66, 75, 95, 1);
+                line-height: 20px;
+                min-width: 16px;
+                display: table-cell;
+                box-sizing: border-box;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                text-align: center;
+            }
+
+            .block-eight .table .tr:nth-child(even) {
+                background: rgba(235, 242, 248, 1);
+            }
+
+            .block-eight .table .tr:hover {
+                height: 50px;
+                background: rgba(80, 123, 252, 1);
+                box-shadow: 0px 10px 20px rgba(80, 123, 252, 0.5);
+                transition: 0.3s;
+            }
+
+            .block-eight .table .tr.action td {
+                font-size: 14px;
+                font-family: PingFangSC-Regular, PingFang SC;
+                font-weight: 400;
+                color: rgba(255, 255, 255, 1);
+                line-height: 20px;
+
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="page" id="page">
+            <!-- 第一块数据 -->
+            <div class="block block-one white-bg">
+                <div class="top flex flex-pack-justify">
+                    <div class="title">地区分布统计</div>
+                    <div class="date">
+                        <select data-name="one">
+                            <option value="2014">2014年</option>
+                            <option value="2014">2014年</option>
+                            <option value="2016">2016年</option>
+                            <option value="2017">2017年</option>
+                            <option value="2018">2018年</option>
+                            <option value="2019" selected>2019年</option>
+                            <option value="2020">2020年</option>
+                            <option value="2021">2021年</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="echartImg">
+                    <div class="list clearfloat">
+                        <ul>
+                            <li>
+                                <div class="label">全部企业</div>
+                                <div class="value">5363</div>
+                            </li>
+                            <li>
+                                <div class="label">全部企业</div>
+                                <div class="value">5363</div>
+                            </li>
+                            <li>
+                                <div class="label">全部企业</div>
+                                <div class="value">5363</div>
+                            </li>
+                            <li>
+                                <div class="label">全部企业</div>
+                                <div class="value">5363</div>
+                            </li>
+                        </ul>
+                        <ul>
+                            <li>
+                                <div class="label">企业信用-A级</div>
+                                <div class="value">5363</div>
+                            </li>
+                            <li>
+                                <div class="label">企业信用-A级</div>
+                                <div class="value">5363</div>
+                            </li>
+                            <li>
+                                <div class="label">企业信用-A级</div>
+                                <div class="value">5363</div>
+                            </li>
+                            <li>
+                                <div class="label">企业信用-A级</div>
+                                <div class="value">5363</div>
+                            </li>
+                        </ul>
+                        <ul>
+                            <li>
+                                <div class="label">营业收入</div>
+                                <div class="value">5363.00</div>
+                            </li>
+                            <li>
+                                <div class="label">营业收入</div>
+                                <div class="value">5363.00</div>
+                            </li>
+                            <li>
+                                <div class="label">营业收入</div>
+                                <div class="value">5363.00</div>
+                            </li>
+                            <li>
+                                <div class="label">营业收入</div>
+                                <div class="value">5363.00</div>
+                            </li>
+                        </ul>
+                        <ul>
+                            <li>
+                                <div class="label">销售额</div>
+                                <div class="value">5363.00</div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="map">
+                        <div class="content">
+                            <div data-name="quyu1" class="quyu quyu1">中山</div>
+                            <div data-name="quyu2" class="quyu quyu2">西岗</div>
+                            <div data-name="quyu3" class="quyu quyu3">沙河口</div>
+                            <div data-name="quyu4" class="quyu quyu4">甘井子</div>
+                            <div data-name="quyu5" class="quyu quyu5 action">高新园</div>
+                            <div data-name="quyu6" class="quyu quyu6">旅顺口</div>
+                            <div data-name="quyu7" class="quyu quyu7">金州</div>
+                            <div data-name="quyu8" class="quyu quyu8">开发</div>
+                            <div data-name="quyu9" class="quyu quyu9">保税</div>
+                            <div data-name="quyu10" class="quyu quyu10">普兰店</div>
+                            <div data-name="quyu11" class="quyu quyu11">瓦房店</div>
+                            <div data-name="quyu12" class="quyu quyu12">庄河</div>
+                            <div data-name="quyu13" class="quyu quyu13">长海县</div>
+                            <div data-name="quyu14" class="quyu quyu14">长兴岛</div>
+                            <div data-name="quyu15" class="quyu quyu15">花园口</div>
+                            <div data-name="quyu16" class="quyu quyu16">重点企业</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 第二块 -->
+            <div class="block block-two white-bg clearfloat">
+                <div class="top flex flex-pack-justify">
+                    <div class="title">行业占比统计</div>
+                    <div class="date">
+                        <select data-name="date" style="margin-right: 24px;">
+                            <option value="2014">2014年</option>
+                            <option value="2014">2014年</option>
+                            <option value="2016">2016年</option>
+                            <option value="2017">2017年</option>
+                            <option value="2018">2018年</option>
+                            <option value="2019" selected>2019年</option>
+                            <option value="2020">2020年</option>
+                            <option value="2021">2021年</option>
+                        </select>
+                        <select data-name="qiye">
+                            <option value="0" selected>所有企业</option>
+                            <option value="1">有效企业</option>
+                            <option value="2">新增企业</option>
+                            <option value="3">注销企业</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="content clearfloat">
+                    <div class="echartImg"></div>
+                    <div class="list">
+                        <div class="table-con">
+                            <div class="tit">全部：<span>4396</span></div>
+                            <table class="table" cellpadding="0" cellspacing="0">
+                                <tr class="t-header">
+                                    <th class="td">街道</th>
+                                    <th class="td">占比</th>
+                                    <th class="td">数量</th>
+                                </tr>
+                                <tbody class="tbody">
+                                    <!-- <tr class="tr">
+                                        <td class="td">五三街道</td>
+                                        <td class="td">20%</td>
+                                        <td class="td">1000</td>
+                                    </tr> -->
+                                </tbody>
+
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 第三块 -->
+            <div class="block block-three white-bg clearfloat">
+                <div class="top flex flex-pack-justify">
+                    <div class="title">街道占比统计</div>
+                    <div class="date">
+                        <select data-name="date" style="margin-right: 24px;">
+                            <option value="2014">2014年</option>
+                            <option value="2014">2014年</option>
+                            <option value="2016">2016年</option>
+                            <option value="2017">2017年</option>
+                            <option value="2018">2018年</option>
+                            <option value="2019" selected>2019年</option>
+                            <option value="2020">2020年</option>
+                            <option value="2021">2021年</option>
+                        </select>
+                        <select data-name="qiye">
+                            <option value="0" selected>所有企业</option>
+                            <option value="1">有效企业</option>
+                            <option value="2">新增企业</option>
+                            <option value="3">注销企业</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="content clearfloat">
+                    <div class="list">
+                        <div class="table-con">
+                            <div class="tit">全部：<span>4396</span></div>
+                            <table class="table" cellpadding="0" cellspacing="0">
+                                <tr class="t-header">
+                                    <th class="td">行业</th>
+                                    <th class="td">占比</th>
+                                    <th class="td">数量</th>
+                                </tr>
+                                <tbody class="tbody">
+                                    <!-- <tr class="tr">
+                                        <td class="td">五三街道</td>
+                                        <td class="td">20%</td>
+                                        <td class="td">1000</td>
+                                    </tr> -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="echartImg"></div>
+                </div>
+            </div>
+
+
+            <!-- 第四块 -->
+            <div class="block block-four flex flex-pack-justify">
+                <div class="item white-bg item-one">
+                    <div class="top flex flex-pack-justify">
+                        <div class="title">负债统计表</div>
+                        <div class="date">
+                            <select data-name="one">
+                                <option value="2014">2014年</option>
+                                <option value="2014">2014年</option>
+                                <option value="2016">2016年</option>
+                                <option value="2017">2017年</option>
+                                <option value="2018">2018年</option>
+                                <option value="2019" selected>2019年</option>
+                                <option value="2020">2020年</option>
+                                <option value="2021">2021年</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="echartImg"></div>
+                </div>
+                <div class="item white-bg item-two">
+                    <div class="top flex flex-pack-justify">
+                        <div class="title">资产统计表</div>
+                        <div class="date">
+                            <select data-name="two">
+                                <option value="2014">2014年</option>
+                                <option value="2014">2014年</option>
+                                <option value="2016">2016年</option>
+                                <option value="2017">2017年</option>
+                                <option value="2018">2018年</option>
+                                <option value="2019" selected>2019年</option>
+                                <option value="2020">2020年</option>
+                                <option value="2021">2021年</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="echartImg"></div>
+                </div>
+                <div class="item white-bg item-three">
+                    <div class="top flex flex-pack-justify">
+                        <div class="title">所有者权益(或股东权益)</div>
+                        <div class="date">
+                            <select data-name="three">
+                                <option value="2014">2014年</option>
+                                <option value="2014">2014年</option>
+                                <option value="2016">2016年</option>
+                                <option value="2017">2017年</option>
+                                <option value="2018">2018年</option>
+                                <option value="2019" selected>2019年</option>
+                                <option value="2020">2020年</option>
+                                <option value="2021">2021年</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="echartImg"></div>
+                </div>
+            </div>
+
+            <!-- 第五块 -->
+            <div class="block block-five flex flex-pack-justify">
+                <div class="item white-bg item-one">
+                    <div class="top flex flex-pack-justify">
+                        <div class="title">利润季度统计表</div>
+                        <div class="date">
+                            <select data-name="one">
+                                <option value="2014">2014年</option>
+                                <option value="2014">2014年</option>
+                                <option value="2016">2016年</option>
+                                <option value="2017">2017年</option>
+                                <option value="2018">2018年</option>
+                                <option value="2019" selected>2019年</option>
+                                <option value="2020">2020年</option>
+                                <option value="2021">2021年</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="echartImg"></div>
+                </div>
+                <div class="item white-bg item-two">
+                    <div class="top flex flex-pack-justify">
+                        <div class="title">利润年度统计表</div>
+                    </div>
+                    <div class="echartImg"></div>
+                </div>
+            </div>
+
+
+            <!-- 第六块 -->
+            <div class="block block-six flex flex-pack-justify">
+                <div class="item white-bg item-one">
+                    <div class="top flex flex-pack-justify">
+                        <div class="title">增值税销售额统计表</div>
+                        <div class="date">
+                            <select data-name="one">
+                                <option value="2014">2014年</option>
+                                <option value="2014">2014年</option>
+                                <option value="2016">2016年</option>
+                                <option value="2017">2017年</option>
+                                <option value="2018">2018年</option>
+                                <option value="2019" selected>2019年</option>
+                                <option value="2020">2020年</option>
+                                <option value="2021">2021年</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="echartImg"></div>
+                </div>
+                <div class="item white-bg item-two">
+                    <div class="top flex flex-pack-justify">
+                        <div class="title">信用评分统计表</div>
+                        <div class="date">
+                            <select data-name="two">
+                                <option value="2014">2014年</option>
+                                <option value="2014">2014年</option>
+                                <option value="2016">2016年</option>
+                                <option value="2017">2017年</option>
+                                <option value="2018">2018年</option>
+                                <option value="2019" selected>2019年</option>
+                                <option value="2020">2020年</option>
+                                <option value="2021">2021年</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="echartImg"></div>
+                </div>
+            </div>
+
+
+
+            <!--  第七块- -->
+            <div class="block block-seven white-bg">
+                <div class="top flex flex-pack-justify">
+                    <div class="title">纳税申报明细统计表</div>
+                    <div class="date">
+                        <select data-name="one">
+                            <option value="2014">2014年</option>
+                            <option value="2014">2014年</option>
+                            <option value="2016">2016年</option>
+                            <option value="2017">2017年</option>
+                            <option value="2018">2018年</option>
+                            <option value="2019" selected>2019年</option>
+                            <option value="2020">2020年</option>
+                            <option value="2021">2021年</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="echartImg"></div>
+
+            </div>
+
+            <!-- 第八块 -->
+            <div class="block block-eight white-bg">
+                <div class="top flex flex-pack-justify">
+                    <div class="title">净入庄统计表</div>
+                    <div class="date">
+                        <select data-name="one">
+                            <option value="2014">2014年</option>
+                            <option value="2014">2014年</option>
+                            <option value="2016">2016年</option>
+                            <option value="2017">2017年</option>
+                            <option value="2018">2018年</option>
+                            <option value="2019" selected>2019年</option>
+                            <option value="2020">2020年</option>
+                            <option value="2021">2021年</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="content clearfloat">
+                    <div class="echartImg"></div>
+                    <div class="list">
+                        <div class="table-con">
+                            <table class="table" cellpadding="0" cellspacing="0">
+                                <tr class="t-header">
+                                    <th class="td">税种</th>
+                                    <th class="td">中央</th>
+                                    <th class="td">地</th>
+                                    <th class="td">区</th>
+                                    <th class="td">乡</th>
+                                    <th class="td">合计</th>
+                                </tr>
+                                <tbody class="tbody">
+
+                                    <tr class="tr">
+                                        <td class="td">201611210000001</td>
+                                        <td class="td">贾宝玉</td>
+                                        <td class="td">2019-02-03</td>
+                                        <td class="td">2019-02-03</td>
+                                        <td class="td">2019-02-03</td>
+                                        <td class="td">20160531</td>
+                                    </tr>
+
+
+                                </tbody>
+
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </body>
+
+</html>
+<script src="../lib/jquery-3.4.1.min.js"></script>
+<script src="../lib/echarts-4.0.4.min.js"></script>
+<script src="../lib/layer/2.4/layer.js"></script>
+<script>
+    //通用方法
+    var wxx = {
+        httpUtil: {
+            ajax: function (settings) {
+                // if (settings.loadingMsg !== undefined && settings.loadingMsg !== null && settings.loadingMsg !== '') {
+                //     // loading3(settings.loadingMsg);
+                //     layer.loading("loading...")
+                // }
+                var index = layer.load(1,{
+                    shade: [0.6,'#fff'] //0.1透明度的白色背景
+                });
+
+                var defer = $.Deferred();
+
+                $.ajax({
+                    type: settings.method != null ? settings.method : 'GET',
+                    dataType: settings.dataType != null ? settings.dataType : 'json',
+                    contentType: settings.contentType != null ? settings.contentType : 'application/json',
+                    url: settings.url,
+                    data: settings.data != null ? settings.data : {},
+            		/*
+                    header: settings.header ? settings.header : {
+                        'Accept': 'application/json',
+                        'content-type': 'application/json'
+                    },
+                    */
+                    //async:false,
+                    success: function (res) {
+                        // console.log("success");
+                        console.log(res);
+                        layer.close(index);
+                        defer.resolve(res);
+
+                    },
+                    fail: function (res) {
+                        reject(res);
+                        layer.close(index);
+                        console.log("failed");
+                    },
+                    complete: function () {
+                        layer.close(index);
+                        //setTimeout(closeLoading2,100);
+                        if (settings.autoCloseLoading != null && settings.autoCloseLoading == false) {
+                            return;
+                        }
+                        // closeLoading3();
+                    }
+                });
+
+                return defer;
+            },
+            get: function (url,loadingMsg,autoCloseLoading) {
+                return this.ajax({
+                    url: url,
+                    method: 'GET',
+                    loadingMsg: loadingMsg,
+                    autoCloseLoading: autoCloseLoading
+                });
+            },
+            post: function (url,data,loadingMsg,autoCloseLoading) {
+                data = data != null ? JSON.stringify(data) : null;
+                return this.ajax({
+                    url: url,
+                    data: data,
+                    method: 'POST',
+                    loadingMsg: loadingMsg,
+                    autoCloseLoading: autoCloseLoading
+                });
+            },
+            postForm: function (url,data,loadingMsg,autoCloseLoading) {
+                return this.ajax({
+                    url: url,
+                    data: data,
+                    method: 'POST',
+                    contentType: 'application/x-www-form-urlencoded',
+                    loadingMsg: loadingMsg,
+                    autoCloseLoading: autoCloseLoading
+                });
+            }
+        },
+        alert: function (info) {
+            layer.alert(info)
+        }
+    };
+</script>
+<script>
+    $(function () {
+        var state = {
+
+            //第一块数据
+            blockOne: [
+                [
+                    {
+                        label: "全部企业",
+                        value: 4546,
+                    },
+                    {
+                        label: "全部企业",
+                        value: 4546,
+                    },
+                    {
+                        label: "全部企业",
+                        value: 4546,
+                    },
+                    {
+                        label: "全部企业",
+                        value: 4546,
+                    },
+                ],
+                [
+                    {
+                        label: "企业信用-A级",
+                        value: 4546,
+                    },
+                    {
+                        label: "企业信用-A级",
+                        value: 4546,
+                    },
+                    {
+                        label: "企业信用-A级",
+                        value: 4546,
+                    },
+                    {
+                        label: "企业信用-A级",
+                        value: 4546,
+                    },
+                ],
+                [
+                    {
+                        label: "营业收入",
+                        value: 4546,
+                    },
+                    {
+                        label: "营业收入",
+                        value: 4546,
+                    },
+                    {
+                        label: "营业收入",
+                        value: 4546,
+                    },
+                    {
+                        label: "营业收入",
+                        value: 4546,
+                    },
+                ],
+                [
+                    {
+                        label: "销售额",
+                        value: 4546,
+                    }, 
+                ]
+            ],
+
+            //第二块数据
+            blockTwo: {
+
+                //总数据
+                totalNumber: "10000",
+
+                // 表格数据
+                listData: [
+                    {
+                        //第一列数据
+                        d1: "五三街道",
+                        //第二列数据
+                        d2: "100%",
+                        //第三列数据
+                        d3: 10000
+                    },
+                    {
+                        //第一列数据
+                        d1: "五三街道",
+                        //第二列数据
+                        d2: "100%",
+                        //第三列数据
+                        d3: 10000
+                    },
+                    {
+                        //第一列数据
+                        d1: "五三街道",
+                        //第二列数据
+                        d2: "100%",
+                        //第三列数据
+                        d3: 10000
+                    },
+                    {
+                        //第一列数据
+                        d1: "五三街道",
+                        //第二列数据
+                        d2: "100%",
+                        //第三列数据
+                        d3: 10000
+                    },
+                    {
+                        //第一列数据
+                        d1: "五三街道",
+                        //第二列数据
+                        d2: "100%",
+                        //第三列数据
+                        d3: 10000
+                    },
+
+                ],
+
+                // 饼图数据
+                pieData: [
+                    {
+                        label: "营业税",
+                        value: 2154,
+                        // 百分百比
+                        than: "30"
+                    },
+                    {
+                        label: "消费税",
+                        value: 524,
+                        // 百分百比
+                        than: "30"
+                    },
+                    {
+                        label: "企业所得税",
+                        value: 789,
+                        // 百分百比
+                        than: "30"
+                    },
+                    {
+                        label: "增值税",
+                        value: 550,
+                        // 百分百比
+                        than: "30"
+                    },
+                    {
+                        label: "个人所得税",
+                        value: 999,
+                        // 百分百比
+                        than: "30"
+                    },
+                    {
+                        label: "其他其他",
+                        value: 666,
+                        // 百分百比
+                        than: "30"
+                    },
+                    {
+                        label: "二十六街道",
+                        value: 666,
+                        // 百分百比
+                        than: "30"
+                    },
+                    {
+                        label: "中三",
+                        value: 666,
+                        // 百分百比
+                        than: "30"
+                    },
+                    {
+                        label: "瓦房店",
+                        value: 666,
+                        // 百分百比
+                        than: "30"
+                    },
+                    {
+                        label: "开发区",
+                        value: 666,
+                        // 百分百比
+                        than: "30"
+                    },
+                    {
+                        label: "高新园",
+                        value: 666,
+                        // 百分百比
+                        than: "30"
+                    }
+                ],
+            },
+
+
+            //第三块数据
+            blockThree: {
+
+                //总数据
+                totalNumber: "10000",
+
+                // 表格数据
+                listData: [
+                    {
+                        //第一列数据
+                        d1: "五三街道",
+                        //第二列数据
+                        d2: "100%",
+                        //第三列数据
+                        d3: 10000
+                    },
+                    {
+                        //第一列数据
+                        d1: "五三街道",
+                        //第二列数据
+                        d2: "100%",
+                        //第三列数据
+                        d3: 10000
+                    },
+                    {
+                        //第一列数据
+                        d1: "五三街道",
+                        //第二列数据
+                        d2: "100%",
+                        //第三列数据
+                        d3: 10000
+                    },
+                    {
+                        //第一列数据
+                        d1: "五三街道",
+                        //第二列数据
+                        d2: "100%",
+                        //第三列数据
+                        d3: 10000
+                    },
+                    {
+                        //第一列数据
+                        d1: "五三街道",
+                        //第二列数据
+                        d2: "100%",
+                        //第三列数据
+                        d3: 10000
+                    },
+
+                ],
+
+                // 饼图数据
+                pieData: [
+                    {
+                        label: "营业税",
+                        value: 2154,
+                        // 百分百比
+                        than: "30"
+                    },
+                    {
+                        label: "消费税",
+                        value: 524,
+                        // 百分百比
+                        than: "30"
+                    },
+                    {
+                        label: "企业所得税",
+                        value: 789,
+                        // 百分百比
+                        than: "30"
+                    },
+                    {
+                        label: "增值税",
+                        value: 550,
+                        // 百分百比
+                        than: "30"
+                    },
+                    {
+                        label: "个人所得税",
+                        value: 999,
+                        // 百分百比
+                        than: "30"
+                    }
+                ],
+            },
+
+
+
+            //第四块数据
+            blockFour: {
+                //第一小块数据
+                one: [
+                    {
+                        label: "第一季度",
+                        // 流动资产
+                        currentAssets: 4.8,
+                        // 非流动资产
+                        noCurrentAssets: -10,
+                        //资产合计
+                        assetsCount: 2,
+                    },
+                    {
+                        label: "第二季度",
+                        // 流动资产
+                        currentAssets: 10,
+                        // 非流动资产
+                        noCurrentAssets: -15,
+                        //资产合计
+                        assetsCount: -5,
+                    },
+                    {
+                        label: "第三季度",
+                        // 流动资产
+                        currentAssets: 9,
+                        // 非流动资产
+                        noCurrentAssets: -5,
+                        //资产合计
+                        assetsCount: 4,
+                    },
+                    {
+                        label: "第四季度",
+                        // 流动资产
+                        currentAssets: 20,
+                        // 非流动资产
+                        noCurrentAssets: -15,
+                        //资产合计
+                        assetsCount: 5,
+                    }
+                ],
+
+                //第二小块数据
+                two: [
+                    {
+                        label: "第一季度",
+                        // 流动负债合计
+                        currentAssets: 4.8,
+                        // 非流动负债合计
+                        noCurrentAssets: -10,
+                        //负债合计
+                        assetsCount: 2,
+                    },
+                    {
+                        label: "第二季度",
+                        // 流动负债合计
+                        currentAssets: 4,
+                        // 非流动负债合计
+                        noCurrentAssets: -2,
+                        //资产合计
+                        assetsCount: -5,
+                    },
+                    {
+                        label: "第三季度",
+                        // 流动负债合计
+                        currentAssets: 9,
+                        // 非流动负债合计
+                        noCurrentAssets: -5,
+                        //资产合计
+                        assetsCount: 4,
+                    },
+                    {
+                        label: "第四季度",
+                        // 流动负债合计
+                        currentAssets: 20,
+                        // 非流动负债合计
+                        noCurrentAssets: -7,
+                        //资产合计
+                        assetsCount: 5,
+                    }
+                ],
+
+                //第三小块数据
+                three: [
+                    {
+                        label: "第一季度",
+                        // 实收资本(或股本)
+                        currentAssets: 8,
+                        // 未分配利润
+                        noCurrentAssets: -5,
+                        //所有者权益(或股东权益)合计
+                        assetsCount: 2,
+                    },
+                    {
+                        label: "第二季度",
+                        // 实收资本(或股本)
+                        currentAssets: 9,
+                        // 未分配利润
+                        noCurrentAssets: -15,
+                        //所有者权益(或股东权益)合计
+                        assetsCount: -5,
+                    },
+                    {
+                        label: "第三季度",
+                        // 实收资本(或股本)
+                        currentAssets: 9,
+                        // 未分配利润
+                        noCurrentAssets: -5,
+                        //所有者权益(或股东权益)合计
+                        assetsCount: 4,
+                    },
+                    {
+                        label: "第四季度",
+                        // 实收资本(或股本)
+                        currentAssets: 2,
+                        // 未分配利润
+                        noCurrentAssets: -9,
+                        //所有者权益(或股东权益)合计
+                        assetsCount: 5,
+                    }
+                ],
+
+
+            },
+
+
+            //第五块数据
+            blockFive: {
+                one: [
+                    {
+                        label: "第一季度",
+                        d1: 1000, //营业收入
+                        d2: 2000, //营业利润
+                        d3: 3000, //净利润
+                        d4: 5000, //利润合计
+                        d5: 3000, //销售费用
+                        d6: 2000, //管理费用
+                        d7: 4000, //财务费用
+                    },
+                    {
+                        label: "第二季度",
+                        d1: 333, //营业收入
+                        d2: 3333, //营业利润
+                        d3: 444, //净利润
+                        d4: 5000, //利润合计
+                        d5: 4444, //销售费用
+                        d6: 2222, //管理费用
+                        d7: 4000, //财务费用
+                    },
+                    {
+                        label: "第三季度",
+                        d1: 1000, //营业收入
+                        d2: 3333, //营业利润
+                        d3: 3000, //净利润
+                        d4: 3332, //利润合计
+                        d5: 3000, //销售费用
+                        d6: 2000, //管理费用
+                        d7: 333, //财务费用
+                    },
+                    {
+                        label: "第四季度",
+                        d1: 777, //营业收入
+                        d2: 777, //营业利润
+                        d3: 777, //净利润
+                        d4: 5000, //利润合计
+                        d5: 307, //销售费用
+                        d6: 7775, //管理费用
+                        d7: 34, //财务费用
+                    }
+                ],
+                two: [
+                    {
+                        label: "2016",
+                        d1: 1000, //营业收入
+                        d2: 2000, //营业利润
+                        d3: 3000, //净利润
+                        d4: 5000, //利润合计
+                        d5: 3000, //销售费用
+                        d6: 2000, //管理费用
+                        d7: 4000, //财务费用
+                    },
+                    {
+                        label: "2017",
+                        d1: 333, //营业收入
+                        d2: 3333, //营业利润
+                        d3: 444, //净利润
+                        d4: 5000, //利润合计
+                        d5: 4444, //销售费用
+                        d6: 2222, //管理费用
+                        d7: 4000, //财务费用
+                    },
+                    {
+                        label: "2018",
+                        d1: 1000, //营业收入
+                        d2: 3333, //营业利润
+                        d3: 3000, //净利润
+                        d4: 3332, //利润合计
+                        d5: 3000, //销售费用
+                        d6: 2000, //管理费用
+                        d7: 333, //财务费用
+                    },
+                    {
+                        label: "2019",
+                        d1: 777, //营业收入
+                        d2: 777, //营业利润
+                        d3: 777, //净利润
+                        d4: 5000, //利润合计
+                        d5: 307, //销售费用
+                        d6: 7775, //管理费用
+                        d7: 34, //财务费用
+                    }
+                ]
+            },
+
+
+            //第六块数据
+            blockSix: {
+                one: [
+                    {
+                        label: "第一季度",
+                        d1: 1000, //本年
+                        d2: 2000, //本期 
+                    },
+                    {
+                        label: "第二季度",
+                        d1: 333,
+                        d2: 3333,
+                    },
+                    {
+                        label: "第三季度",
+                        d1: 1000,
+                        d2: 3333,
+                    },
+                    {
+                        label: "第四季度",
+                        d1: 777,
+                        d2: 777,
+                    }
+                ],
+                two: [
+                    {
+                        label: "A",
+                        d1: 5, //营业收入 
+                    },
+                    {
+                        label: "B",
+                        d1: 4, //营业收入 
+                    },
+                    {
+                        label: "C",
+                        d1: 8, //营业收入 
+                    },
+                    {
+                        label: "D",
+                        d1: 7, //营业收入 
+                    },
+                    {
+                        label: "E",
+                        d1: 7, //营业收入 
+                    },
+                    {
+                        label: "F",
+                        d1: 2, //营业收入 
+                    }
+                ]
+            },
+
+
+
+
+
+            //第七块数据
+            blockSeven: {
+
+                // 饼图数据
+                pieData: [
+                    {
+                        label: "营业税",
+                        value: 2154
+                    },
+                    {
+                        label: "消费税",
+                        value: 524
+                    },
+                    {
+                        label: "企业所得税",
+                        value: 789
+                    },
+                    {
+                        label: "增值税",
+                        value: 550
+                    },
+                    {
+                        label: "个人所得税",
+                        value: 999
+                    },
+                    {
+                        label: "其他其他",
+                        value: 666
+                    }
+                ],
+
+                //折线图数据
+                lineData: [
+                    {
+                        label: "一月",
+                        // 应纳税额
+                        taking: 300,
+                        // 已缴税额
+                        operatingProfit: 200,
+                        //应补退税额
+                        retainedProfits: 100,
+                        //减免税额
+                        combinedProfits: 60,
+                    },
+                    {
+                        label: "二月",
+                        // 应纳税额
+                        taking: 333,
+                        // 已缴税额
+                        operatingProfit: 300,
+                        //应补退税额
+                        retainedProfits: 223,
+                        //减免税额
+                        combinedProfits: 44,
+                    },
+                    {
+                        label: "三月",
+                        // 应纳税额
+                        taking: 65,
+                        // 已缴税额
+                        operatingProfit: 123,
+                        //应补退税额
+                        retainedProfits: 44,
+                        //减免税额
+                        combinedProfits: 22,
+                    },
+                    {
+                        label: "四月",
+                        // 应纳税额
+                        taking: 300,
+                        // 已缴税额
+                        operatingProfit: 3344,
+                        //应补退税额
+                        retainedProfits: 100,
+                        //减免税额
+                        combinedProfits: 90,
+                    },
+                    {
+                        label: "五月",
+                        // 应纳税额
+                        taking: 60,
+                        // 已缴税额
+                        operatingProfit: 300,
+                        //应补退税额
+                        retainedProfits: 100,
+                        //减免税额
+                        combinedProfits: 60,
+                    },
+                    {
+                        label: "六月",
+                        // 应纳税额
+                        taking: 300,
+                        // 已缴税额
+                        operatingProfit: 200,
+                        //应补退税额
+                        retainedProfits: 100,
+                        //减免税额
+                        combinedProfits: 60,
+                    },
+                    {
+                        label: "一月",
+                        // 应纳税额
+                        taking: 300,
+                        // 已缴税额
+                        operatingProfit: 200,
+                        //应补退税额
+                        retainedProfits: 100,
+                        //减免税额
+                        combinedProfits: 60,
+                    },
+                    {
+                        label: "一月",
+                        // 应纳税额
+                        taking: 300,
+                        // 已缴税额
+                        operatingProfit: 200,
+                        //应补退税额
+                        retainedProfits: 100,
+                        //减免税额
+                        combinedProfits: 60,
+                    },
+                    {
+                        label: "一月",
+                        // 应纳税额
+                        taking: 300,
+                        // 已缴税额
+                        operatingProfit: 200,
+                        //应补退税额
+                        retainedProfits: 100,
+                        //减免税额
+                        combinedProfits: 60,
+                    },
+                    {
+                        label: "一月",
+                        // 应纳税额
+                        taking: 300,
+                        // 已缴税额
+                        operatingProfit: 200,
+                        //应补退税额
+                        retainedProfits: 100,
+                        //减免税额
+                        combinedProfits: 60,
+                    },
+                    {
+                        label: "一月",
+                        // 应纳税额
+                        taking: 300,
+                        // 已缴税额
+                        operatingProfit: 200,
+                        //应补退税额
+                        retainedProfits: 100,
+                        //减免税额
+                        combinedProfits: 60,
+                    },
+                    {
+                        label: "一月",
+                        // 应纳税额
+                        taking: 300,
+                        // 已缴税额
+                        operatingProfit: 200,
+                        //应补退税额
+                        retainedProfits: 100,
+                        //减免税额
+                        combinedProfits: 60,
+                    }
+                ]
+
+            },
+
+            // //第七块数据
+            blockEight: {
+
+                // 折线图数据
+                lineData: [
+                    {
+                        label: "一月",
+                        // 实缴
+                        taking: 300,
+                        // 实缴合计
+                        operatingProfit: 200,
+                    },
+                    {
+                        label: "二月",
+                        // 实缴
+                        taking: 333,
+                        // 实缴合计
+                        operatingProfit: 300,
+                    },
+                    {
+                        label: "三月",
+                        // 实缴
+                        taking: 65,
+                        // 实缴合计
+                        operatingProfit: 123,
+                    },
+                    {
+                        label: "四月",
+                        // 应纳税额
+                        taking: 300,
+                        // 已缴税额
+                        operatingProfit: 3344,
+                    },
+                    {
+                        label: "四月",
+                        // 应纳税额
+                        taking: 300,
+                        // 已缴税额
+                        operatingProfit: 3344,
+                    },
+                    {
+                        label: "四月",
+                        // 应纳税额
+                        taking: 300,
+                        // 已缴税额
+                        operatingProfit: 3344,
+                    },
+                    {
+                        label: "四月",
+                        // 应纳税额
+                        taking: 300,
+                        // 已缴税额
+                        operatingProfit: 3344,
+                    },
+                    {
+                        label: "四月",
+                        // 应纳税额
+                        taking: 300,
+                        // 已缴税额
+                        operatingProfit: 3344,
+                    },
+                    {
+                        label: "四月",
+                        // 应纳税额
+                        taking: 300,
+                        // 已缴税额
+                        operatingProfit: 3344,
+                    },
+                    {
+                        label: "四月",
+                        // 应纳税额
+                        taking: 300,
+                        // 已缴税额
+                        operatingProfit: 3344,
+                    },
+                    {
+                        label: "四月",
+                        // 应纳税额
+                        taking: 300,
+                        // 已缴税额
+                        operatingProfit: 3344,
+                    },
+                    {
+                        label: "四月",
+                        // 应纳税额
+                        taking: 300,
+                        // 已缴税额
+                        operatingProfit: 3344,
+                    },
+
+                ],
+
+                // 右边表格数据
+                listData: [
+                    {
+                        label: "税种一",
+                        //中央
+                        center: 500.00,
+                        //地
+                        land: 500.00,
+                        //区
+                        district: 500.00,
+                        //乡
+                        village: 500.00,
+                        //合计
+                        count: 500.00,
+                    },
+                    {
+                        label: "税种一",
+                        //中央
+                        center: 500.00,
+                        //地
+                        land: 500.00,
+                        //区
+                        district: 500.00,
+                        //乡
+                        village: 500.00,
+                        //合计
+                        count: 500.00,
+                    },
+                    {
+                        label: "税种一",
+                        //中央
+                        center: 500.00,
+                        //地
+                        land: 500.00,
+                        //区
+                        district: 500.00,
+                        //乡
+                        village: 500.00,
+                        //合计
+                        count: 500.00,
+                    },
+                    {
+                        label: "税种一",
+                        //中央
+                        center: 500.00,
+                        //地
+                        land: 500.00,
+                        //区
+                        district: 500.00,
+                        //乡
+                        village: 500.00,
+                        //合计
+                        count: 500.00,
+                    },
+                    {
+                        label: "税种一",
+                        //中央
+                        center: 500.00,
+                        //地
+                        land: 500.00,
+                        //区
+                        district: 500.00,
+                        //乡
+                        village: 500.00,
+                        //合计
+                        count: 500.00,
+                    },
+                    {
+                        label: "税种一",
+                        //中央
+                        center: 500.00,
+                        //地
+                        land: 500.00,
+                        //区
+                        district: 500.00,
+                        //乡
+                        village: 500.00,
+                        //合计
+                        count: 500.00,
+                    },
+                    {
+                        label: "税种一",
+                        //中央
+                        center: 500.00,
+                        //地
+                        land: 500.00,
+                        //区
+                        district: 500.00,
+                        //乡
+                        village: 500.00,
+                        //合计
+                        count: 500.00,
+                    },
+                    {
+                        label: "税种一",
+                        //中央
+                        center: 500.00,
+                        //地
+                        land: 500.00,
+                        //区
+                        district: 500.00,
+                        //乡
+                        village: 500.00,
+                        //合计
+                        count: 500.00,
+                    },
+                    {
+                        label: "税种一",
+                        //中央
+                        center: 500.00,
+                        //地
+                        land: 500.00,
+                        //区
+                        district: 500.00,
+                        //乡
+                        village: 500.00,
+                        //合计
+                        count: 500.00,
+                    },
+                    {
+                        label: "税种一",
+                        //中央
+                        center: 500.00,
+                        //地
+                        land: 500.00,
+                        //区
+                        district: 500.00,
+                        //乡
+                        village: 500.00,
+                        //合计
+                        count: 500.00,
+                    }
+                ],
+
+            },
+
+
+            //获取第一个数据块需要用到的参数
+            getOneBlockDataParams: {},
+
+            //获取第二个数据块需要用到的参数
+            getTwoBlockDataParams: {},
+
+            //获取第三个数据块需要用到的参数
+            getThreeBlockDataParams: {},
+
+            //所有的echarts图表
+            charts: {}
+        }
+
+        function setState(data) {
+            for (var key in data) {
+                state[key] = data[key];
+            }
+        }
+        //设置整体样式 
+        $(window).resize(setStyle)
+        function setStyle() {
+            //页面尺寸改变时候同时改表图表尺寸
+            for (var key in state.charts) {
+                state.charts[key].resize()
+            }
+        }
+
+
+
+
+        //第一块数据块渲染================
+
+        // getDataByBlocOne();
+        //获取数据方法
+        var getDataByBlocOne = function () {
+            wxx.httpUtil.ajax({
+                method: 'GET',
+                url: "http://baidu.com/apis/aaa",
+                data:  state.getOneBlockDataParams
+            }).done(function (data) { 
+                setState({ blockOne: data });
+                blockOneRender();
+            })
+        }
+
+
+        //渲染方法
+        blockOneRender();
+
+        
+        // 地图点击监听
+        $('.block-one .map .quyu').click(function(){
+            $(this).addClass('action').siblings('.action').removeClass('action');
+            var name = $(this).attr('data-name');
+            state.getOneBlockDataParams.quyu = name; 
+            getDataByBlocOne();
+        })
+
+         //年份下拉切换监听
+         $('.block-one .date select').change(function () {
+            var val = $(this).val(); 
+            state.getOneBlockDataParams.date = val;
+            getDataByBlocOne()
+        })
+
+        function blockOneRender(param) {
+            var data = state["blockOne"];
+            var $dom = $(".block-one .list");
+            $dom.html('');
+
+            $.each(data, function(i, ulData){
+                var $ul = $('<ul></ul>');
+                $.each(ulData, function(ii, liData){ 
+                    var $li = $('<li><div class="label">'+liData.label+'</div><div class="value">'+liData.value+'</div></li>');
+                    $ul.append($li);
+                })
+                $dom.append($ul)
+            }) 
+        }
+
+
+
+        //第二块数据块渲染 ================
+        //渲染
+        blockTwoRender()
+
+        //获取数据方法
+        // getDataByBlockTwo() 
+        var getDataByBlockTwo = function () {
+            wxx.httpUtil.ajax({
+                method: 'GET',
+                url: "http://baidu.com/apis/aaa",
+                data: state.getTwoBlockDataParams
+            }).done(function (data) {
+                //设置表格数据并且渲染 
+                setState({ blockTwo: data });
+                blockTwoRender();
+            })
+        }
+
+        //年份下拉切换监听
+        $('.block-two .date select').change(function () {
+            var val = $(this).val();
+            var name = $(this).attr("data-name");
+            state.getTwoBlockDataParams[name] = val;
+            getDataByBlockTwo()
+        })
+
+        function blockTwoRender() {
+            var pieData = state["blockTwo"].pieData || [];
+            var listData = state["blockTwo"].listData || [];
+            var totalNumber = state["blockTwo"].totalNumber || 0;
+            var $dom = $(".block-two").find('.echartImg');
+            var $listDom = $(".block-two").find('.tbody');
+            $(".block-two").find('.list').find('.tit span').html(totalNumber);
+
+            var xAxis = [];
+            var d1 = [];
+            var d2 = [];
+
+
+            //右边小圈数据计算
+            var xAxisByPie = [];
+            var namsData = {};
+
+            for (var i = 0; i < pieData.length; i++) {
+                xAxisByPie.push(pieData[i].label);
+                pieData[i].name = pieData[i].label;
+                namsData[pieData[i].label] = pieData[i].than;
+            }
+
+            var option = {
+                color: ['rgba(80, 123, 252, 1)','rgba(255, 79, 79, 1)','rgba(121, 236, 202, 1)','rgba(246, 151, 255, 1)','rgba(255, 178, 79, 1)','rgba(215, 215, 215, 1)'],
+                legend: {
+                    left: "41%",
+                    right: 0,
+                    top: "middle",
+                    data: xAxisByPie,
+                    // 强制设置图形为圆。
+                    icon: 'circle',
+                    formatter: function (name) {
+                        let num = namsData[name];
+                        return '{name| ' + name + '}\n' + '{num| ' + num + '%}'
+                    },
+                    textStyle: {
+                        color: 'rgba(27, 37, 58, 1)',
+                        // 使用回调函数
+
+                        rich: {
+                            name: {
+                                fontSize: 16,
+                                color: 'rgba(27,37,58,1)',
+                                lineHeight: 24,
+                                height: 24,
+                                width: 105
+                            },
+                            num: {
+                                fontSize: 30,
+                                color: 'rgba(27,37,58,1)',
+                                lineHeight: 52,
+                                height: 52,
+                            },
+                        }
+
+                    },
+
+                },
+                grid: {
+                    left: 30,
+                    right: '0%',
+                    top: '20%',
+                    bottom: '6%',
+                    containLabel: true
+                },
+                toolbox: {
+                    "show": false,
+                    feature: {
+                        saveAsImage: {}
+                    }
+                },
+
+                series: [
+                    {
+                        type: 'pie',
+                        radius: '60%',
+                        center: ['20%','50%'],
+                        data: pieData,
+                        label: { show: false },
+                        labelLine: {
+                            show: false
+                        },
+                        emphasis: {
+                            itemStyle: {
+                                shadowBlur: 10,
+                                shadowOffsetX: 0,
+                                shadowColor: 'rgba(0, 0, 0, 0.5)'
+                            }
+                        }
+                    }
+                ]
+            };
+
+            // 基于准备好的dom，初始化echarts实例
+            var myChart = echarts.init($dom[0]);
+            // 使用刚指定的配置项和数据显示图表。
+            myChart.setOption(option);
+            state.charts.two = myChart;
+
+
+            //渲染右边列表
+            //清空dom
+            $listDom.html('');
+
+            //渲染具体数据 位置顺序和表单对应即可
+            var $ttd = $('.block-two .table .t-header .td');
+            $.each(listData,function (i,item) {
+                var $tr = $('<tr class="tr">'
+                    + '<td class="td" style="width:' + $ttd.eq(0).width() + 'px">' + item.d1 + '</td>'
+                    + '<td class="td" style="width:' + $ttd.eq(1).width() + 'px">' + item.d2 + '</td>'
+                    + '<td class="td" style="width:' + $ttd.eq(2).width() + 'px">' + item.d3 + '</td>'
+                    + '</tr>');
+                $listDom.append($tr);
+
+            })
+
+
+        }
+
+
+
+
+        //第三块数据块渲染================
+
+        blockThreeRender();
+
+        //获取数据方法
+        // getDataByBlockThree() 
+        var getDataByBlockThree = function () {
+            wxx.httpUtil.ajax({
+                method: 'GET',
+                url: "http://baidu.com/apis/aaa",
+                data: state.getThreeBlockDataParams
+            }).done(function (data) {
+                //设置表格数据并且渲染 
+                setState({ blockThree: data });
+                blockThreeRender();
+            })
+        }
+
+        //年份下拉切换监听
+        $('.block-three .date select').change(function () {
+            var val = $(this).val();
+            var name = $(this).attr("data-name");
+            state.getThreeBlockDataParams[name] = val;
+            getDataByBlockThree()
+        })
+
+        function blockThreeRender() {
+
+            var pieData = state["blockThree"].pieData || [];
+            var listData = state["blockThree"].listData || [];
+            var totalNumber = state["blockThree"].totalNumber || 0;
+            var $dom = $(".block-three").find('.echartImg');
+            var $listDom = $(".block-three").find('.tbody');
+            $(".block-three").find('.list').find('.tit span').html(totalNumber);
+
+            var xAxis = [];
+            var d1 = [];
+            var d2 = [];
+
+
+            //右边小圈数据计算
+            var xAxisByPie = [];
+            var namsData = {};
+
+            for (var i = 0; i < pieData.length; i++) {
+                xAxisByPie.push(pieData[i].label);
+                pieData[i].name = pieData[i].label;
+                namsData[pieData[i].label] = pieData[i].than;
+            }
+
+            var option = {
+                color: ['rgba(80, 123, 252, 1)','rgba(255, 79, 79, 1)','rgba(121, 236, 202, 1)','rgba(246, 151, 255, 1)','rgba(255, 178, 79, 1)','rgba(215, 215, 215, 1)'],
+                legend: {
+                    left: "60%",
+                    right: 0,
+                    top: "middle",
+                    data: xAxisByPie,
+                    // 强制设置图形为圆。
+                    icon: 'circle',
+                    formatter: function (name) {
+                        let num = namsData[name];
+                        return '{name| ' + name + '}\n' + '{num| ' + num + '%}'
+                    },
+                    textStyle: {
+                        color: 'rgba(27, 37, 58, 1)',
+                        // 使用回调函数
+
+                        rich: {
+                            name: {
+                                fontSize: 16,
+                                color: 'rgba(27,37,58,1)',
+                                lineHeight: 24,
+                                height: 24,
+                                width: 105
+                            },
+                            num: {
+                                fontSize: 30,
+                                color: 'rgba(27,37,58,1)',
+                                lineHeight: 52,
+                                height: 52,
+                            },
+                        }
+
+                    },
+
+                },
+                grid: {
+                    left: 60,
+                    right: '20%',
+                    top: '20%',
+                    bottom: '6%',
+                    containLabel: true
+                },
+                toolbox: {
+                    "show": false,
+                    feature: {
+                        saveAsImage: {}
+                    }
+                },
+
+                series: [
+                    {
+                        type: 'pie',
+                        radius: ['45%',"70%"],
+                        center: ['30%','50%'],
+                        data: pieData,
+                        label: { show: false },
+                        labelLine: {
+                            show: false
+                        },
+                        emphasis: {
+                            itemStyle: {
+                                shadowBlur: 10,
+                                shadowOffsetX: 0,
+                                shadowColor: 'rgba(0, 0, 0, 0.5)'
+                            }
+                        }
+                    }
+                ]
+            };
+
+            // 基于准备好的dom，初始化echarts实例
+            var myChart = echarts.init($dom[0]);
+            // 使用刚指定的配置项和数据显示图表。
+            myChart.setOption(option);
+            state.charts.three = myChart;
+
+
+            //渲染右边列表
+            //清空dom
+            $listDom.html('');
+
+            //渲染具体数据 位置顺序和表单对应即可
+            var $ttd = $('.block-two .table .t-header .td');
+            $.each(listData,function (i,item) {
+                var $tr = $('<tr class="tr">'
+                    + '<td class="td" style="width:' + $ttd.eq(0).width() + 'px">' + item.d1 + '</td>'
+                    + '<td class="td" style="width:' + $ttd.eq(1).width() + 'px">' + item.d2 + '</td>'
+                    + '<td class="td" style="width:' + $ttd.eq(2).width() + 'px">' + item.d3 + '</td>'
+                    + '</tr>');
+                $listDom.append($tr);
+
+            })
+
+
+        }
+
+
+
+
+
+
+        //第四块数据块渲染================ 
+
+        //渲染方法
+        blockFourRender("one");
+        blockFourRender("two");
+        blockFourRender("three");
+
+        //获取数据方法
+        // blockFourRender("one", "2019");
+        // blockFourRender("two", "2019");
+        // blockFourRender("three", "2019");
+
+        //获取第一个小块的数据
+        //@name 要获取的小块的名字 one two three
+        //@date 时间参数给后台的  2019
+        var getDataByBlockFour = function (name,date) {
+            wxx.httpUtil.ajax({
+                method: 'GET',
+                url: "http://baidu.com/apis/aaa",
+                data: {
+                    date: date
+                }
+            }).done(function (data) {
+                //设置表格数据并且渲染
+                var blockFour = state.blockFour;
+                blockFour[name] = data;
+                setState({ blockFour: blockFour });
+                blockFourRender(name);
+            })
+        }
+        //小块年下拉切换监听
+        $('.block-four .date select').change(function () {
+            var val = $(this).val();
+            var name = $(this).attr("data-name");
+            getDataByBlockFour(name,val)
+        })
+
+        //@name  要渲染的小块的名字
+        function blockFourRender(name) {
+            var data = state["blockFour"][name] || [];
+            var $dom = $(".block-four .item-" + name).find('.echartImg');
+
+            var lenName = {
+                one: ["流动资产合计","非流动资产合计","资产合计"],
+                two: ["流动资产合计","非流动资产合计","负债合计"],
+                three: ["实收资本(或股本)","未分配利润","所有者权益(或股东权益)合计"],
+            }[name];
+
+            var xAxis = [];
+            var d1 = [];
+            var d2 = [];
+            var d3 = [];
+
+            for (var i = 0; i < data.length; i++) {
+                xAxis.push(data[i].label);
+                d1.push(data[i].noCurrentAssets);
+                d2.push(data[i].currentAssets);
+                d3.push(data[i].assetsCount);
+            }
+            var option = {
+                grid: {
+                    left: '0%',
+                    right: '0%',
+                    bottom: '0%',
+                    top: "10%",
+                    containLabel: true
+                },
+                legend: {
+                    data: lenName,
+                    right: 0,
+                    top: 0,
+                    textStyle: {
+                        fontSize: 11
+                    },
+
+                },
+                tooltip: {
+                    axisPointer: { type: 'none' },
+                    trigger: 'axis',
+                    extraCssText: 'padding:15px;box-shadow:0px 0px 8px 0px rgba(0,0,0,0.3);border-radius:1px;background:rgba(255,255,255,1);color:rgba(27, 37, 58, 1);font-size:11px'
+                },
+                xAxis: [{
+                    type: 'category',
+                    data: xAxis,
+                    axisLabel: {
+                        fontSize: 14,
+                        color: "rgba(151, 164, 186, 1)",
+                        margin: 24
+                    },
+                    axisLine: {
+                        show: false
+                    },
+                    axisTick: {
+                        show: false
+                    }
+                }],
+                yAxis: [{
+                    type: 'value',
+                    axisLabel: {
+                        color: "rgba(151, 164, 186, 1)",
+                        formatter: function (num) {
+                            return num + "K"
+                        },
+                    },
+                    axisLine: {
+                        show: false
+                    },
+                    axisTick: {
+                        show: false
+                    }
+
+                }],
+                series: [
+                    {
+                        type: 'bar',
+                        barWidth: 30,
+                        data: d2,
+                        stack: 'one',
+                        name: lenName[0],
+                        itemStyle: {
+                            normal: {
+                                shadowBlur: 5,
+                                color: 'rgba(80, 123, 252, 1)',
+                                shadowColor: "rgba(80, 123, 252, 1)",
+                            }
+                        }
+                    },
+                    {
+                        type: 'bar',
+                        barWidth: 30,
+                        data: d1,
+                        stack: 'one',
+                        name: lenName[1],
+                        itemStyle: {
+                            normal: {
+                                shadowBlur: 5,
+                                shadowColor: "rgba(255, 79, 79, 1)",
+                                color: 'rgba(255, 79, 79, 1)'
+                            }
+                        }
+                    },
+                    {
+                        type: 'line',
+                        data: d3,
+                        // zlevel:-1,
+                        smooth: true,
+                        name: lenName[2],
+                        itemStyle: {
+                            normal: {
+                                shadowBlur: 10,
+                                shadowColor: "rgba(121, 236, 202, 1)",
+                                color: 'rgba(121, 236, 202, 1)'
+                            }
+                        }
+                    }
+                ]
+            };
+
+            // 基于准备好的dom，初始化echarts实例
+            var myChart = echarts.init($dom[0]);
+            // 使用刚指定的配置项和数据显示图表。
+            myChart.setOption(option);
+            state.charts[('blockFour' + name)] = myChart;
+        }
+
+
+
+        // 第五块数据渲染 
+        //第一个小块 渲染
+        blockFiveRender("one");
+        blockFiveRender("two");
+
+        //获取数据方法
+        // getDataByBlockFive("2019", "one")
+        // getDataByBlockFive("2019", "two")
+
+        //获取第一个小块的数据 
+        //@date 时间参数给后台的  2019
+        var getDataByBlockFive = function (date,name) {
+            wxx.httpUtil.ajax({
+                method: 'GET',
+                url: "http://baidu.com/apis/aaa",
+                data: {
+                    date: date
+                }
+            }).done(function (data) {
+                //设置表格数据并且渲染
+                var blockFive = state.blockFive;
+                blockFive[name] = data
+                setState({ blockFive: blockFive });
+                blockFiveRender(name);
+            })
+        }
+
+        //年份下拉切换监听
+        $('.block-five .date select').change(function () {
+            var val = $(this).val();
+            var name = $(this).attr('data-name');
+            getDataByBlockFive(val,name)
+        })
+
+        function blockFiveRender(name) {
+            var data = state["blockFive"][name] || [];
+            var $dom = $(".block-five .item-" + name).find('.echartImg');
+
+            //折线图数据归纳
+            var xAxis = [];
+            var d1 = [];
+            var d2 = [];
+            var d3 = [];
+            var d4 = [];
+            var d5 = [];
+            var d6 = [];
+            var d7 = [];
+            for (var i = 0; i < data.length; i++) {
+                xAxis.push(data[i].label)
+                d1.push(data[i].d1)
+                d2.push(data[i].d2)
+                d3.push(data[i].d3)
+                d4.push(data[i].d4)
+                d5.push(data[i].d5)
+                d6.push(data[i].d6)
+                d7.push(data[i].d7)
+            }
+
+            var option = {
+                color: ['rgba(80, 123, 252, 1)','rgba(255, 79, 79, 1)','rgba(121, 236, 202, 1)','rgba(246, 151, 255, 1)','#D7D7D7',"orangered",'yellowgreen'],
+                grid: {
+                    left: '0%',
+                    right: '0%',
+                    bottom: '0%',
+                    top: "10%",
+                    containLabel: true
+                },
+                legend: {
+                    data: ['营业收入','营业利润','净利润','利润合计','销售费用','管理费用','财务费用'],
+                    right: 0,
+                    top: 0,
+                },
+                xAxis: {
+                    type: 'category',
+                    "axisLine": {
+                        show: false,
+                        lineStyle: {
+                            color: 'rgba(0, 0, 0, 0.2)'
+                        }
+                    },
+                    "axisTick": {
+                        "show": false
+                    },
+                    axisLabel: {
+                        textStyle: {
+                            fontSize: 14,
+                            color: "rgba(151, 164, 186, 1)",
+                        },
+                        margin: 24,
+                    },
+                    // boundaryGap: false,
+                    boundaryGap: ['1%','-10%'],
+                    data: xAxis,
+                },
+                yAxis: {
+                    "axisLine": {
+                        show: false,
+                    },
+                    splitLine: {
+                        show: true,
+                        lineStyle: {
+                            color: 'rgba(0, 0, 0, 0.2)'
+                        }
+                    },
+                    "axisTick": {
+                        "show": false
+                    },
+                    axisLabel: {
+                        color: "rgba(151, 164, 186, 1)",
+                        formatter: function (num) {
+                            return num + "K"
+                        },
+                    },
+                    type: 'value'
+                },
+                tooltip: {
+                    trigger: 'axis',
+                    extraCssText: 'padding:15px;box-shadow:0px 0px 8px 0px rgba(0,0,0,0.3);border-radius:1px;background:rgba(255,255,255,1);color:rgba(27, 37, 58, 1);font-size:11px'
+                },
+                series: [
+                    {
+                        name: '营业收入',
+                        smooth: true,
+                        type: 'line',
+                        symbolSize: 8,
+                        symbol: 'circle',
+                        data: d1,
+                        itemStyle: {
+                            opacity: 0
+                        },
+                    },
+                    {
+                        name: '营业利润',
+                        smooth: true,
+                        type: 'line',
+                        symbolSize: 8,
+                        symbol: 'circle',
+                        data: d2,
+                        itemStyle: {
+                            opacity: 0
+                        },
+                    },
+                    {
+                        name: '净利润',
+                        smooth: true,
+                        type: 'line',
+                        symbolSize: 8,
+                        symbol: 'circle',
+                        data: d3,
+                        itemStyle: {
+                            opacity: 0
+                        },
+                    },
+                    {
+                        name: '利润合计',
+                        smooth: true,
+                        type: 'line',
+                        symbolSize: 8,
+                        symbol: 'circle',
+                        data: d4,
+                        itemStyle: {
+                            opacity: 0
+                        },
+                    },
+                    {
+                        name: '销售费用',
+                        smooth: true,
+                        type: 'line',
+                        symbolSize: 8,
+                        symbol: 'circle',
+                        data: d5,
+                        itemStyle: {
+                            opacity: 0
+                        },
+                    },
+                    {
+                        name: '管理费用',
+                        smooth: true,
+                        type: 'line',
+                        symbolSize: 8,
+                        symbol: 'circle',
+                        data: d6,
+                        itemStyle: {
+                            opacity: 0
+                        },
+                    },
+                    {
+                        name: '财务费用',
+                        smooth: true,
+                        type: 'line',
+                        symbolSize: 8,
+                        symbol: 'circle',
+                        data: d7,
+                        itemStyle: {
+                            opacity: 0
+                        },
+                    },
+                ]
+            };
+
+
+            // 基于准备好的dom，初始化echarts实例
+            var myChart = echarts.init($dom[0]);
+            // 使用刚指定的配置项和数据显示图表。
+            myChart.setOption(option);
+            state.charts['Five' + name] = myChart;
+        }
+
+
+
+
+        //第六块数据块渲染================
+        //第一个小块 渲染
+        blockSixRender("one");
+        blockSixRender("two");
+
+        //获取数据方法
+        // getDataByBlockSix("2019", "one")
+        // getDataByBlockSixSix("2019", "two")
+
+        //获取第一个小块的数据 
+        //@date 时间参数给后台的  2019
+        var getDataByBlockSix = function (date,name) {
+            wxx.httpUtil.ajax({
+                method: 'GET',
+                url: "http://baidu.com/apis/aaa",
+                data: {
+                    date: date
+                }
+            }).done(function (data) {
+                //设置表格数据并且渲染
+                var blockSix = state.blockSix;
+                blockSix[name] = data
+                setState({ blockSix: blockSix });
+                blockSixRender(name);
+            })
+        }
+
+        //年份下拉切换监听
+        $('.block-six .date select').change(function () {
+            var val = $(this).val();
+            var name = $(this).attr('data-name');
+            getDataByBlockSix(val,name)
+        })
+
+        function blockSixRender(name) {
+            var data = state["blockSix"][name] || [];
+            var $dom = $(".block-six .item-" + name).find('.echartImg');
+
+            //折线图数据归纳
+            var xAxis = [];
+            var d1 = [];
+            var d2 = [];
+            for (var i = 0; i < data.length; i++) {
+                xAxis.push(data[i].label)
+                d1.push(data[i].d1)
+                d2.push(data[i].d2)
+            }
+
+            var option = {
+                color: ['rgba(80, 123, 252, 1)','rgba(255, 79, 79, 1)','rgba(121, 236, 202, 1)','rgba(246, 151, 255, 1)','#D7D7D7',"orangered",'yellowgreen'],
+                grid: {
+                    left: '0%',
+                    right: '0%',
+                    bottom: '0%',
+                    top: "10%",
+                    containLabel: true
+                },
+                legend: {
+                    data: ['本年销售金额','本期销售金额','净利润','利润合计','销售费用','管理费用','财务费用'],
+                    right: 0,
+                    top: 0,
+                },
+
+                tooltip: {
+                    trigger: 'axis',
+                    formatter: name === "two" ? function (data) {
+                        return data[0].marker + data[0].axisValue + '级' + data[0].seriesName + "数 - " + data[0].value + 'W'
+                    } : null,
+                    extraCssText: 'padding:15px;box-shadow:0px 0px 8px 0px rgba(0,0,0,0.3);border-radius:1px;background:rgba(255,255,255,1);color:rgba(27, 37, 58, 1);font-size:11px'
+                },
+                xAxis: [
+                    {
+                        type: 'category',
+                        data: xAxis,
+                        axisLabel: {
+                            fontSize: 14,
+                            color: "rgba(151, 164, 186, 1)",
+                            margin: 24,
+                            formatter: function (num) {
+                                return num + "级"
+                            },
+                        },
+                        axisLine: {
+                            show: false
+                        },
+                        axisTick: {
+                            show: false
+                        }
+                    }
+                ],
+                yAxis: [
+                    {
+                        type: 'value',
+                        axisLabel: {
+                            color: "rgba(151, 164, 186, 1)",
+                            formatter: function (num) {
+                                return num + "W"
+                            },
+                        },
+                        axisLine: {
+                            show: false
+                        },
+                        axisTick: {
+                            show: false
+                        }
+                    }
+                ],
+                series: name === "one" ? [
+                    {
+                        name: '本年销售金额',
+                        type: 'bar',
+                        data: d1,
+                        barWidth: 30,
+                        itemStyle: {
+                            normal: {
+                                shadowBlur: 5,
+                                color: 'rgba(80, 123, 252, 1)',
+                                shadowColor: "rgba(80, 123, 252, 1)",
+                            }
+                        }
+                    },
+                    {
+                        name: '本期销售金额',
+                        type: 'bar',
+                        data: d2,
+                        barWidth: 30,
+                        itemStyle: {
+                            normal: {
+                                shadowBlur: 5,
+                                shadowColor: "rgba(255, 79, 79, 1)",
+                                color: 'rgba(255, 79, 79, 1)'
+                            }
+                        }
+                    }
+                ] : [
+                        {
+                            name: '信用企业数',
+                            type: 'bar',
+                            data: d1,
+                            barWidth: 30,
+                            itemStyle: {
+                                normal: {
+                                    shadowBlur: 5,
+                                    color: 'rgba(80, 123, 252, 1)',
+                                    shadowColor: "rgba(80, 123, 252, 1)",
+                                }
+                            }
+                        }
+                    ]
+            };
+
+
+            // 基于准备好的dom，初始化echarts实例
+            var myChart = echarts.init($dom[0]);
+            // 使用刚指定的配置项和数据显示图表。
+            myChart.setOption(option);
+            state.charts['six' + name] = myChart;
+        }
+
+
+
+        //第七块数据块渲染================ 
+
+        blockSevenRender()
+
+        //获取数据方法
+        // getDataByBlockSeven("2019")
+
+        //@date 时间参数给后台的  2019
+        var getDataByBlockSeven = function (date) {
+            wxx.httpUtil.ajax({
+                method: 'GET',
+                url: "http://baidu.com/apis/aaa",
+                data: {
+                    date: date
+                }
+            }).done(function (data) {
+                //设置表格数据并且渲染 
+                setState({ blockSeven: data });
+                blockSevenRender();
+            })
+        }
+
+        //年份下拉切换监听
+        $('.block-seven .date select').change(function () {
+            var val = $(this).val();
+            getDataByBlockSeven(val)
+        })
+
+        function blockSevenRender() {
+            var data = state["blockSeven"].lineData || [];
+            var pieData = state["blockSeven"].pieData || [];
+            var $dom = $(".block-seven").find('.echartImg');
+
+            //折线图数据归纳
+            var xAxis = [];
+            var d1 = [];
+            var d2 = [];
+            var d3 = [];
+            var d4 = [];
+
+            for (var i = 0; i < data.length; i++) {
+                xAxis.push(data[i].label);
+                d1.push(data[i].taking);
+                d2.push(data[i].operatingProfit);
+                d3.push(data[i].retainedProfits);
+                d4.push(data[i].combinedProfits);
+            }
+
+            //右边小圈数据计算
+            var xAxisByPie = [];
+            var namsData = {};
+            for (var i = 0; i < pieData.length; i++) {
+                xAxisByPie.push(pieData[i].label);
+                pieData[i].name = pieData[i].label;
+                namsData[pieData[i].label] = pieData[i].value;
+            }
+
+            var option = {
+                color: ['rgba(80, 123, 252, 1)','rgba(255, 79, 79, 1)','rgba(121, 236, 202, 1)','rgba(246, 151, 255, 1)','rgba(255, 178, 79, 1)','rgba(215, 215, 215, 1)'],
+                legend: [
+                    {
+                        x: "28%",
+                        top: '7%',
+                        data: ['应纳税额','已缴税额','应补退税额',"减免税额"]
+                    },
+                    {
+                        left: "80%",
+                        right: 30,
+                        top: "middle",
+                        data: xAxisByPie,
+                        // 强制设置图形为圆。
+                        icon: 'circle',
+                        formatter: function (name) {
+                            let num = namsData[name];
+                            return '{name| ' + name + '}\n' + '{num| ' + num + '}'
+                        },
+                        textStyle: {
+                            color: 'rgba(27, 37, 58, 1)',
+                            // 使用回调函数
+
+                            rich: {
+                                name: {
+                                    fontSize: 16,
+                                    color: 'rgba(27,37,58,1)',
+                                    lineHeight: 24,
+                                    height: 24,
+                                    width: 110
+                                },
+                                num: {
+                                    fontSize: 30,
+                                    color: 'rgba(27,37,58,1)',
+                                    lineHeight: 42,
+                                    height: 42,
+                                },
+                            }
+
+                        },
+
+                    }
+                ],
+                grid: {
+                    left: 30,
+                    right: '50%',
+                    top: '20%',
+                    bottom: '6%',
+                    containLabel: true
+                },
+                toolbox: {
+                    "show": false,
+                    feature: {
+                        saveAsImage: {}
+                    }
+                },
+                xAxis: {
+                    type: 'category',
+                    "axisLine": {
+                        show: false,
+                        lineStyle: {
+                            color: 'rgba(0, 0, 0, 0.2)'
+                        }
+                    },
+                    "axisTick": {
+                        "show": false
+                    },
+                    axisLabel: {
+                        textStyle: {
+                            fontSize: 14,
+                            color: "rgba(151, 164, 186, 1)",
+                        },
+                        margin: 24,
+                    },
+                    // boundaryGap: false,
+                    boundaryGap: ['1%','-10%'],
+                    data: xAxis,
+                },
+                yAxis: {
+                    "axisLine": {
+                        show: false,
+                    },
+                    splitLine: {
+                        show: true,
+                        lineStyle: {
+                            color: 'rgba(0, 0, 0, 0.2)'
+                        }
+                    },
+                    "axisTick": {
+                        "show": false
+                    },
+                    axisLabel: {
+                        color: "rgba(151, 164, 186, 1)",
+                        formatter: function (num) {
+                            return num + "K"
+                        },
+                    },
+                    type: 'value'
+                },
+                tooltip: {
+                    trigger: 'axis',
+                    extraCssText: 'padding:15px;box-shadow:0px 0px 8px 0px rgba(0,0,0,0.3);border-radius:1px;background:rgba(255,255,255,1);color:rgba(27, 37, 58, 1);font-size:11px'
+                },
+                series: [
+                    {
+                        name: '应纳税额',
+                        smooth: true,
+                        type: 'line',
+                        symbolSize: 8,
+                        symbol: 'circle',
+                        data: d1,
+                        itemStyle: {
+                            opacity: 0
+                        },
+                        lineStyle: {
+                            color: 'rgba(80, 123, 252, 1)'
+                        }
+                    },
+                    {
+                        name: '已缴税额',
+                        smooth: true,
+                        type: 'line',
+                        symbolSize: 8,
+                        symbol: 'circle',
+                        data: d2,
+                        itemStyle: {
+                            opacity: 0
+                        },
+                        lineStyle: {
+                            color: 'rgba(255, 79, 79, 1)'
+                        }
+                    },
+                    {
+                        name: '应补退税额',
+                        smooth: true,
+                        type: 'line',
+                        symbolSize: 8,
+                        symbol: 'circle',
+                        data: d3,
+
+                        itemStyle: {
+                            opacity: 0
+                        },
+                        lineStyle: {
+                            color: 'rgba(121, 236, 202, 1)'
+                        }
+                    },
+
+                    {
+                        name: '减免税额',
+                        smooth: true,
+                        type: 'line',
+                        symbolSize: 8,
+                        symbol: 'circle',
+                        data: d4,
+
+                        itemStyle: {
+                            opacity: 0
+                        },
+                        lineStyle: {
+                            color: 'rgba(246, 151, 255, 1)'
+                        }
+                    },
+
+                    {
+                        name: 'pie',
+                        type: 'pie',
+                        clockWise: false,
+                        radius: [90,150],
+                        center: ['67%','50%'],
+                        labelLine: {
+                            show: false
+                        },
+                        itemStyle: {
+                        },
+                        label: {
+                            show: false,
+                        },
+                        data: pieData,
+
+                    },
+
+                ]
+            };
+
+            // 基于准备好的dom，初始化echarts实例
+            var myChart = echarts.init($dom[0]);
+            // 使用刚指定的配置项和数据显示图表。
+            myChart.setOption(option);
+            state.charts.seven = myChart;
+
+        }
+
+
+
+        //第八块数据块渲染================ 
+
+        //渲染
+        blockEightRender()
+
+        //获取数据方法
+        // getDataByBlockEight("2019")
+
+        //@date 时间参数给后台的  2019
+        var getDataByBlockEight = function (date) {
+            wxx.httpUtil.ajax({
+                method: 'GET',
+                url: "http://baidu.com/apis/aaa",
+                data: {
+                    date: date
+                }
+            }).done(function (data) {
+                //设置表格数据并且渲染 
+                setState({ blockEight: data });
+                blockEightRender();
+            })
+        }
+
+        //年份下拉切换监听
+        $('.block-eight .date select').change(function () {
+            var val = $(this).val();
+            getDataByBlockEight(val)
+        })
+
+        function blockEightRender() {
+            var data = state["blockEight"].lineData || [];
+            var listData = state["blockEight"].listData || [];
+            var $dom = $(".block-eight").find('.echartImg');
+            var $listDom = $(".block-eight").find('.tbody');
+
+            //折线图数据归纳
+            var xAxis = [];
+            var d1 = [];
+            var d2 = [];
+
+            for (var i = 0; i < data.length; i++) {
+                xAxis.push(data[i].label);
+                d1.push(data[i].taking);
+                d2.push(data[i].operatingProfit);
+            }
+
+            var option = {
+                color: ['rgba(80, 123, 252, 1)','rgba(255, 79, 79, 1)','rgba(121, 236, 202, 1)','rgba(246, 151, 255, 1)','rgba(255, 178, 79, 1)','rgba(215, 215, 215, 1)'],
+                legend: [
+                    {
+                        right: 30,
+                        top: '7%',
+                        data: ['实缴','实缴合计']
+                    },
+                ],
+                grid: {
+                    left: 30,
+                    right: 30,
+                    top: '20%',
+                    bottom: '6%',
+                    containLabel: true
+                },
+                toolbox: {
+                    "show": false,
+                    feature: {
+                        saveAsImage: {}
+                    }
+                },
+                xAxis: {
+                    type: 'category',
+                    "axisLine": {
+                        show: false,
+                        lineStyle: {
+                            color: 'rgba(0, 0, 0, 0.2)'
+                        }
+                    },
+                    "axisTick": {
+                        "show": false
+                    },
+                    axisLabel: {
+                        textStyle: {
+                            fontSize: 14,
+                            color: "rgba(151, 164, 186, 1)",
+                        },
+                        margin: 24,
+                    },
+                    // boundaryGap: false,
+                    boundaryGap: ['1%','-10%'],
+                    data: xAxis,
+                },
+                yAxis: {
+                    "axisLine": {
+                        show: false,
+                    },
+                    splitLine: {
+                        show: true,
+                        lineStyle: {
+                            color: 'rgba(0, 0, 0, 0.2)'
+                        }
+                    },
+                    "axisTick": {
+                        "show": false
+                    },
+                    axisLabel: {
+                        color: "rgba(151, 164, 186, 1)",
+                        formatter: function (num) {
+                            return num + "K"
+                        },
+                    },
+                    type: 'value'
+                },
+                tooltip: {
+                    trigger: 'axis',
+                    extraCssText: 'padding:15px;box-shadow:0px 0px 8px 0px rgba(0,0,0,0.3);border-radius:1px;background:rgba(255,255,255,1);color:rgba(27, 37, 58, 1);font-size:11px'
+                },
+                series: [
+                    {
+                        name: '实缴',
+                        smooth: true,
+                        type: 'line',
+                        symbolSize: 8,
+                        symbol: 'circle',
+                        data: d1,
+                        itemStyle: {
+                            opacity: 0
+                        },
+                        lineStyle: {
+                            color: 'rgba(80, 123, 252, 1)'
+                        }
+                    },
+                    {
+                        name: '实缴合计',
+                        smooth: true,
+                        type: 'line',
+                        symbolSize: 8,
+                        symbol: 'circle',
+                        data: d2,
+                        itemStyle: {
+                            opacity: 0
+                        },
+                        lineStyle: {
+                            color: 'rgba(255, 79, 79, 1)'
+                        }
+                    },
+
+                ]
+            };
+
+            // 基于准备好的dom，初始化echarts实例
+            var myChart = echarts.init($dom[0]);
+            // 使用刚指定的配置项和数据显示图表。
+            myChart.setOption(option);
+            state.charts.eight = myChart;
+
+
+            //渲染右边列表
+            //清空dom
+            $listDom.html('');
+
+            //渲染具体数据 位置顺序和表单对应即可
+            var $ttd = $('.block-eight .table .t-header .td');
+            $.each(listData,function (i,item) {
+                var $tr = $('<tr class="tr">'
+                    + '<td class="td" style="width:' + $ttd.eq(0).width() + 'px">' + item.label + '</td>'
+                    + '<td class="td" style="width:' + $ttd.eq(1).width() + 'px">' + item.center + '</td>'
+                    + '<td class="td" style="width:' + $ttd.eq(2).width() + 'px">' + item.land + '</td>'
+                    + '<td class="td" style="width:' + $ttd.eq(3).width() + 'px">' + item.district + '</td>'
+                    + '<td class="td" style="width:' + $ttd.eq(4).width() + 'px">' + item.village + '</td>'
+                    + '<td class="td" style="width:' + ($ttd.eq(5).width() - 8) + 'px">' + item.count + '</td>'
+                    + '</tr>');
+                $listDom.append($tr);
+
+            })
+
+
+        }
+
+
+
+    })
+
+</script>
